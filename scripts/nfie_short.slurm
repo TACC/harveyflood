@@ -35,7 +35,7 @@ last18=`ls -tr ../data/para/${timenow}/short_range/ | tail -n 18`
 echo "last 18 files are: $last18"
 timeonly=`echo $timenow | cut -d "." -f 2`
 echo "timeonly is $timeonly"
-outputfilename=`ls -tr ../data/para/nwm.20170902/short_range/  | tail -n 1  | sed 's/f.../worst/'`
+outputfilename=`ls -tr ../data/para/${timenow}/short_range/  | tail -n 1  | sed 's/f.../worst/'`
 echo "output file name is ${outputfilename} "
 
 mkdir -p ${base}/WorstQ/${timeonly}/short_range
