@@ -1,0 +1,22 @@
+#!/bin/bash
+
+module purge
+module load parallel MPICH gdal2-stack GCC/4.9.2-binutils-2.25 python/2.7.10 pythonlibs/2.7.10
+taudem2=/gpfs_scratch/taudem/TauDEM-CatchHydroGeo
+np=1
+wrootdir=/gpfs_scratch/nfie/users/HUC6
+hucidlist="121003 121002 121004 121001 120903 120904 120701 120401 120402 120302 120200 120301 120602"
+hq_dir=/gpfs/smallblockFS/home/xzheng1/Harvey/20170826/WorstH
+for hucid in $hucidlist; do
+n=$hucid
+wdir=$wrootdir/$hucid
+mapdir=/gpfs/smallblockFS/home/xzheng1/Harvey/20170826/WorstMap
+for entry in "$hq_dir/"*; do
+if  [[ $entry == *nc ]];
+then
+name=$(basename "$entry" ".nc")
+mapfile=${n}${name}inunmap.tif
+mpirun -np $np $taudem2/inunmap -hand $wdir/${n}hand.tif -catch $wdir/${n}catchhuc.tif -mask $wdir/${n}waterbodymask.tif -forecast $entry -mapfile $mapdir/$mapfile
+fi
+done
+done

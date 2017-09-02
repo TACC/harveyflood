@@ -1,0 +1,9 @@
+module purge
+module load parallel MPICH gdal2-stack GCC/4.9.2-binutils-2.25 python/2.7.10 pythonlibs/2.7.10
+. /gpfs_scratch/nfie/users/yanliu/forecast/softenv
+search_dir=/gpfs/smallblockFS/home/xzheng1/Harvey/20170826/WorstQ
+for entry in "$search_dir/"* 
+do
+echo $entry 
+python /gpfs/smallblockFS/home/xzheng1/Harvey/forecast-table.py /gpfs_scratch/nfie/users/HUC6 $entry /gpfs/smallblockFS/home/xzheng1/Harvey/20170826/WorstH
+done

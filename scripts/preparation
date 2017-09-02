@@ -1,0 +1,5 @@
+pip install --user osr
+pip install --user netCDF4
+pip install --user pandas
+pip install --user xarray
+pip install --user datetime

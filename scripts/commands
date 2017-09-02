@@ -1,0 +1,10 @@
+idev -p test1 -m 60 -N -1 -n 1
+
+source /work/projects/TexasFlood/scripts/setenv.bash
+
+
+python /work/projects/TexasFlood/scripts/forecast-nwm-worst.py  /work/projects/TexasFlood/data/para/nwm.20170901/short_range    "nwm.t16z.short_range.channel_rt.f016.conus.nc nwm.t16z.short_range.channel_rt.f017.conus.nc nwm.t16z.short_range.channel_rt.f018.conus.nc" /work/projects/TexasFlood/outputs-1/firsttry.nc
+
+./HQ.sh
+
+./Mapping.sh 

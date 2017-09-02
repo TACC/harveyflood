@@ -18,6 +18,9 @@ Xing Zheng
 
 * data directory
 
+## Run Scripts
+
+* scripts directory
 
 ## Applications
 
