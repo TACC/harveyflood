@@ -37,7 +37,8 @@ timeonly=`echo $timenow | cut -d "." -f 2`
 echo "timeonly is $timeonly"
 outputfilename=`ls -tr ../data/para/${timenow}/short_range/  | tail -n 1  | sed 's/f.../worst/'`
 echo "output file name is ${outputfilename} "
-
+rm -rf ${base}/WorstQ/${timeonly}/short_range
+rm -rf ${base}/WorstH/${timeonly}/short_range 
 mkdir -p ${base}/WorstQ/${timeonly}/short_range
 
 python ${base}/scripts/forecast-nwm-worst.py  ${base}/data/para/${timenow}/short_range    " ${last18} "  ${base}/WorstQ/${timeonly}/short_range/${outputfilename}
