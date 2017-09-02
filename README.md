@@ -1,14 +1,25 @@
-# harveyflood
-
-W. Cyrus Proctor
-Si Liu
-Niall Gaffney
-Matt Vaughn
-Xing Zheng
+# Hurricane Harvey Emergency Flood Response
 
 2017-09-01
 
+## Collaborators
 
+W. Cyrus Proctor
+
+Si Liu
+
+Niall Gaffney
+
+Matt Vaughn
+
+Xing Zheng
+
+## NOAA Data Scraping
+
+* data directory
+
+
+## Applications
 
 Directories:
 * filegdb
