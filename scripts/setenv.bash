@@ -13,3 +13,5 @@ module load nfie-floodmap
 module load netcdf
 #module load taudem-kornholi  
 module load taudem-yan
+
+export base=/work/projects/TexasFlood

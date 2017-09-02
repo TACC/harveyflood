@@ -28,7 +28,19 @@ echo "Data synchronization"
 ${base}/data/update_today_nwm.sh
 
 echo "Generate Peak Flow..."
-python ${base}/scripts/forecast-nwm-worst.py  ${base}/data/para/nwm.20170901/short_range    "nwm.t16z.short_range.channel_rt.f016.conus.nc nwm.t16z.short_range.channel_rt.f017.conus.nc nwm.t16z.short_range.channel_rt.f018.conus.nc" ${base}/outputs-1/firsttry.nc
+
+timenow=`ls -tr ../data/para | tail -1`
+echo "time now is ${timenow}"
+last18=`ls -tr ../data/para/nwm.20170902/short_range/ | tail -n 18`
+echo "last 18 files are: $last18"
+timeonly=`echo $timenow | cut -d "." -f 2`
+echo "timeonly is $timeonly"
+outputfilename=`ls -tr ../data/para/nwm.20170902/short_range/  | tail -n 1  | sed 's/f.../worst/'`
+echo "output file name is ${outputfilename} "
+
+mkdir -p ${base}/WorstQ/${timeonly}/short_range
+
+python ${base}/scripts/forecast-nwm-worst.py  ${base}/data/para/${timenow}/short_range    " ${last18} "  ${base}/WorstQ/${timeonly}/short_range/${outputfilename}
 
 sleep 5
 
