@@ -1,0 +1,46 @@
+#!/bin/bash
+#
+# W. Cyrus Proctor
+# 2017-09-01
+
+ml reset
+ml intel
+ml use /work/projects/TexasFlood/apps/modulefiles
+ml proj4
+ml freexl
+ml basemap
+
+
+export spatialite=/work/projects/TexasFlood/apps/spatialite
+export spatialite_install=${spatialite}/install
+
+export PATH=${TACC_GEOS_LIB}/../bin:${PATH}
+
+export CC=icc
+export CXX=icpc
+export FC=ifort
+export   CFLAGS="-I${TACC_PROJ4_INC} -I${TACC_FREEXL_INC} -I${TACC_GEOS_LIB}/../include"
+export CXXFLAGS="-I${TACC_PROJ4_INC} -I${TACC_FREEXL_INC} -I${TACC_GEOS_LIB}/../include"
+export  LDFLAGS="-L${TACC_PROJ4_LIB} -L${TACC_FREEXL_LIB} -L${TACC_GEOS_LIB}"
+
+
+export ncores=16
+
+
+
+
+cd ${spatialite}
+wget http://www.gaia-gis.it/gaia-sins/libspatialite-4.3.0a.tar.gz
+tar xvfz libspatialite-4.3.0a.tar.gz 
+cd libspatialite-4.3.0a
+
+
+
+
+${spatialite}/libspatialite-4.3.0a/configure \
+--prefix=${spatialite_install}               
+ 
+
+
+make -j ${ncores}
+make -j ${ncores} install

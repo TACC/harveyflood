@@ -1,0 +1,60 @@
+#!/bin/bash
+#
+# W. Cyrus Proctor
+# 2017-09-01
+
+ml reset
+ml intel
+ml python
+ml hdf5
+ml netcdf
+ml basemap
+ml use /work/projects/TexasFlood/apps/modulefiles
+ml sqlite
+ml proj4
+ml freexl
+ml spatialite
+
+
+export gdal=/work/projects/TexasFlood/apps/gdal
+export gdal_install=${gdal}/install
+
+export gdal_major=2
+export gdal_minor=2
+export gdal_patch=1
+export gdal_version=${gdal_major}.${gdal_minor}.${gdal_patch}
+
+export CC=icc
+export CXX=icpc
+export FC=ifort
+
+export ncores=16
+
+cd ${gdal}
+wget http://download.osgeo.org/gdal/${gdal_version}/gdal-${gdal_version}.tar.gz
+tar xvfz gdal-${gdal_version}.tar.gz
+cd gdal-${gdal_version}
+
+${gdal}/gdal-${gdal_version}/configure          \
+--prefix=${gdal_install}                        \
+--with-libtiff=internal                         \
+--with-geotiff=internal                         \
+--with-png=internal                             \
+--with-jpeg=internal                            \
+--with-gif=internal                             \
+--without-curl                                  \
+--with-threads                                  \
+--with-freexl=${TACC_FREEXL_DIR}                \
+--with-netcdf=${TACC_NETCDF_DIR}                \
+--with-hdf5=${TACC_HDF5_DIR}                    \
+--with-python=yes                               \
+--with-fgdb=/work/projects/TexasFlood/apps/filegdb/file-geodatabase-api/FileGDB_API_1.5.1/FileGDB_API-64gcc51 \
+--with-geos=${TACC_GEOS_LIB}/../bin/geos-config \
+--with-sqlite3=${TACC_SQLITE_DIR}               \
+--with-spatialite=${TACC_SPATIALITE_DIR}        \
+--with-static-proj4=${TACC_PROJ4_DIR}
+
+make -j ${ncores}
+make -j ${ncores} install
+
+

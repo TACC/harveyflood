@@ -1,0 +1,35 @@
+#!/bin/bash
+#
+# W. Cyrus Proctor
+# 2017-09-01
+
+
+ml reset
+ml intel
+
+
+export filegdb=/work/projects/TexasFlood/apps/filegdb
+export filegdb_install=${filegdb}/install
+
+export ncores=16
+
+export CC=icc
+export CXX=icpc
+export FC=ifort
+export MPICXX=mpicxx
+export MPICC=mpicc
+export MPIF90=mpif90
+export MPIEXEC=ibrun
+
+
+
+cd ${filegdb}
+git clone git@github.com:Esri/file-geodatabase-api.git
+cd file-geodatabase-api/FileGDB_API_1.5.1
+tar xvfz FileGDB_API_1_5_1-64gcc51.tar.gz
+cd FileGDB_API-64gcc51 
+
+export LD_LIBRARY_PATH=`pwd`/lib
+cd samples
+make
+

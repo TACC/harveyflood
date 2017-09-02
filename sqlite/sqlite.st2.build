@@ -1,0 +1,27 @@
+#!/bin/bash
+#
+# W. Cyrus Proctor
+# 2017-09-01
+
+ml reset
+
+
+export sqlite=/work/projects/TexasFlood/apps/sqlite
+export sqlite_install=${sqlite}/install
+
+export ncores=16
+
+cd ${sqlite}
+wget https://www.sqlite.org/snapshot/sqlite-snapshot-201708251543.tar.gz
+tar xvfz sqlite-snapshot-201708251543.tar.gz
+cd sqlite-snapshot-201708251543
+
+${sqlite}/sqlite-snapshot-201708251543/configure \
+--prefix=${sqlite_install}
+
+
+
+make -j ${ncores}
+make -j ${ncores} install
+
+

@@ -1,0 +1,64 @@
+#!/bin/bash
+#
+# W. Cyrus Proctor
+# 2017-09-01
+
+
+ml reset
+ml intel
+ml cmake
+ml use /work/projects/TexasFlood/apps/modulefiles
+ml gdal
+
+
+export taudem=/work/projects/TexasFlood/apps/taudem-official
+export taudem_install=${taudem}/install
+
+export ncores=16
+
+export CC=icc
+export CXX=icpc
+export FC=ifort
+export MPICXX=mpicxx
+export MPICC=mpicc
+export MPIF90=mpif90
+export MPIEXEC=ibrun
+
+
+
+cd ${taudem}
+git clone git@github.com:dtarb/TauDEM.git
+cd TauDEM
+git checkout tags/v5.3.8
+cd ${taudem}
+mkdir -p build
+cd build
+
+
+cmake                                                              \
+-DCMAKE_INSTALL_PREFIX=${taudem_install}                           \
+-DCMAKE_VERBOSE_MAKEFILE=ON                                        \
+-DCMAKE_EXPORT_COMPILE_COMMANDS=ON                                 \
+-DCMAKE_CXX_COMPILER="${CXX}"                                      \
+-DCMAKE_C_COMPILER="${CC}"                                         \
+-DCMAKE_CXX_FLAGS="${CXXFLAGS}"                                    \
+-DCMAKE_C_FLAGS="${C_FLAGS}"                                       \
+-DMPIEXEC="${MPIEXEC}"                                             \
+-DMPIEXEC_MAX_NUMPROCS=4                                           \
+-DMPI_CXX_COMPILER="${MPICXX}"                                     \
+-DMPI_C_COMPILER="${MPICC}"                                        \
+-DMPI_Fortran_COMPILER="${MPIF90}"                                 \
+-DMPI_CXX_COMPILE_FLAGS="${CXXFLAGS}"                              \
+-DMPI_C_COMPILE_FLAGS="${CFLAGS}"                                  \
+-DMPI_Fortran_COMPILE_FLAGS="${FCFLAGS}"                           \
+-DCMAKE_EXE_LINKER_FLAGS="${LDFLAGS}"                              \
+-DCMAKE_MODULE_LINKER_FLAGS="${LDFLAGS}"                           \
+-DCMAKE_SHARED_LINKER_FLAGS="${LDFLAGS}"                           \
+-DGDAL_LIBRARY=${TACC_GDAL_LIB}/libgdal.so                         \
+-DGDAL_INCLUDE_DIR=${TACC_GDAL_INC}                                \
+-DGDAL_CONFIG=${TACC_GDAL_DIR}/lib/pkgconfig                       \
+${taudem}/TauDEM/src
+
+
+make -j ${ncores}
+make -j ${ncores} install
