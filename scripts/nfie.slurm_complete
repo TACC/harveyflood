@@ -40,7 +40,7 @@ echo "output file name is ${outputfilename} "
 
 mkdir -p ${base}/WorstQ/${timeonly}/short_range
 
-python ${base}/scripts/forecast-nwm-worst.py  /work/projects/TexasFlood/data/XingTest/NWS "nwm.t11z.analysis_assim.channel_rt.tm02.conus.nc nwm.t11z.analysis_assim.channel_rt.tm01.conus.nc nwm.t11z.analysis_assim.channel_rt.tm00.conus.nc"  ${base}/WorstQ
+python ${base}/scripts/forecast-nwm-worst.py  ${base}/data/para/${timenow}/short_range    " ${last18} "  ${base}/WorstQ/${timeonly}/short_range/${outputfilename}
 
 sleep 5
 

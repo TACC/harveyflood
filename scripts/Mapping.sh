@@ -8,13 +8,18 @@ source /work/projects/TexasFlood/scripts/setenv.bash
 taudem2=${TACC_TAUDEMYAN_BIN}
 np=1
 
+timenow=`ls -tr ../data/para | tail -1`
+timeonly=`echo $timenow | cut -d "." -f 2`
+mkdir -p ${base}/WorstH/${timeonly}/short_range
+
 ### This is where the data locates at TACC
 wrootdir=/work/projects/TexasFlood/data/HUC6-new
+
 hucidlist="120401 120402"
+#hucidlist="120100 120200 120301 120302 120401 120402 120500 120601 120602 120701 120702 120800 120901 120902 120903 120904 121001  121002 121003 121004 121101 121102"
 
-#hucidlist="121003 121002 121004 121001 120903 120904 120701 120401 120402 120302 120200 120301 120602"
+hq_dir=${base}/WorstH/${timeonly}/short_range
 
-hq_dir=/work/projects/TexasFlood/WorstH/Test
 for hucid in $hucidlist; do
 n=$hucid
 wdir=$wrootdir/$hucid
