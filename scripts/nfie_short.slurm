@@ -25,7 +25,7 @@ echo "----------------------------------------------"
 
 
 echo "Data synchronization"
-${base}/data/update_today_nwm.sh
+#${base}/data/update_today_nwm.sh
 
 echo "Generate Peak Flow..."
 
@@ -50,3 +50,7 @@ ${base}/scripts/HQ.sh
 sleep 5
 echo "Mapping ..."
 ${base}/scripts/Mapping.sh
+
+
+date
+

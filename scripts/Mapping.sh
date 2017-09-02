@@ -15,15 +15,16 @@ mkdir -p ${base}/WorstH/${timeonly}/short_range
 ### This is where the data locates at TACC
 wrootdir=/work/projects/TexasFlood/data/HUC6-new
 
-hucidlist="120401 120402"
-#hucidlist="120100 120200 120301 120302 120401 120402 120500 120601 120602 120701 120702 120800 120901 120902 120903 120904 121001  121002 121003 121004 121101 121102"
+#hucidlist="120401 120402"
+hucidlist="120100 120200 120301 120302 120401 120402 120500 120601 120602 120701 120702 120800 120901 120902 120903 120904 121001  121002 121003 121004 121101 121102"
 
 hq_dir=${base}/WorstH/${timeonly}/short_range
 
 for hucid in $hucidlist; do
 n=$hucid
 wdir=$wrootdir/$hucid
-mapdir=/work/projects/TexasFlood/WorstMap/Test
+mapdir=/work/projects/TexasFlood/WorstMap/${timeonly}/short_range
+mkdir -p ${mapdir}
 for entry in "$hq_dir/"*; do
 if  [[ $entry == *nc ]];
 then
