@@ -22,12 +22,19 @@ echo "Job script here:"
 echo "----------------------------------------------"
 cat nfie.slurm
 echo "----------------------------------------------"
+
+
+echo "Data synchronization"
+${base}/data/update_today_nwm.sh
+
+echo "Generate Peak Flow..."
 python ${base}/scripts/forecast-nwm-worst.py  ${base}/data/para/nwm.20170901/short_range    "nwm.t16z.short_range.channel_rt.f016.conus.nc nwm.t16z.short_range.channel_rt.f017.conus.nc nwm.t16z.short_range.channel_rt.f018.conus.nc" ${base}/outputs-1/firsttry.nc
 
-sleep 10
+sleep 5
 
+echo "Convert discharge to water level ..."
 ${base}/scripts/HQ.sh
 
-sleep 10
-
+sleep 5
+echo "Mapping ..."
 ${base}/scripts/Mapping.sh

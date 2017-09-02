@@ -10,5 +10,6 @@ export HDF5_DISABLE_VERSION_CHECK=2
 
 module load gdal  
 module load nfie-floodmap 
+module load netcdf
 #module load taudem-kornholi  
 module load taudem-yan
