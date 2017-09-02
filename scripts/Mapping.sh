@@ -10,15 +10,15 @@ np=1
 
 ### This is where the data locates at TACC
 wrootdir=/work/projects/TexasFlood/data/HUC6-new
-hucidlist="120100 120200 120301 120302"
+hucidlist="120401 120402"
 
 #hucidlist="121003 121002 121004 121001 120903 120904 120701 120401 120402 120302 120200 120301 120602"
 
-hq_dir=/work/projects/TexasFlood/outputs-2
+hq_dir=/work/projects/TexasFlood/WorstH/Test
 for hucid in $hucidlist; do
 n=$hucid
 wdir=$wrootdir/$hucid
-mapdir=/work/projects/TexasFlood/outputs-3
+mapdir=/work/projects/TexasFlood/WorstMap/Test
 for entry in "$hq_dir/"*; do
 if  [[ $entry == *nc ]];
 then
